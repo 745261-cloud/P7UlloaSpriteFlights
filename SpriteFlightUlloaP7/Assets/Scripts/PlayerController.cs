@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float thrustForce = 1f;
+    public float maxSpeed = 5f;
+    public GameObject boosterFlame;
     Rigidbody2D rb;
 
     void Start()
@@ -22,6 +24,10 @@ public class PlayerController : MonoBehaviour
             // Move player in direction of mouse
             transform.up = direction;
             rb.AddForce(direction * thrustForce);
+            if (rb.linearVelocity.magnitude > maxSpeed)
+            {
+                rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+            }
         }
     }
 
